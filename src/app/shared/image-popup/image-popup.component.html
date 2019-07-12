@@ -1,0 +1,21 @@
+<!-- Image Popup modal -->
+<div bsModal #successModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog mt-12" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Image popup</h4>
+      <button type="button" class="close" (click)="popupImagePath='';successModal.hide()" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+    </div>
+    <div class="modal-body">
+      <div class="paddingblock">
+        <div class="col align-self-center">
+          <div class="text-center">
+              <img class="w-100" src="{{popupImagePath}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Image Popup modal --> 

@@ -1,0 +1,20 @@
+<!-- View Image Component this is -->
+<div class="modal-dialog customwidth">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">View {{type ? type :'Image'}}</h4>
+          <a  class="fa fa-download icns" href="{{imageUrl}}"  download="{{imageUrl}}" target="_blank">
+            </a>
+            <button type="button" class="close" (click)="close()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="card-block text-center">
+            <img class="img-fluid" src="{{imageUrl}}">
+            </div>
+       </div>
+       <div class="modal-footer">
+
+         <button type="button" class="btn btn-default" (click)="close()" >Close</button>
+       </div>
+    </div>
+</div>

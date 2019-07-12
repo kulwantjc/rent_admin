@@ -1,0 +1,65 @@
+
+<!-- loading section -->
+<div class="aligncenter_loader" *ngIf="isPageLoading">
+    <div class="is-loading"><i class="page-loader"></i></div>        
+</div>
+<!-- loading section ends  -->
+<div class="finance-dashboard" *ngIf="!isPageLoading">
+  <h1 class="text-center ">Welome to dashboard</h1>
+
+    <!-- <div class="card">
+		<div class="row">
+			<div class=" col-xl-8 col-lg-8 col-sm-8 col-md-8" style="margin-left: 19%;">
+		        <div class="card-block text-center" style="padding:13px !important; padding-top: 0 !important;" *ngIf="!isChartLoading && isProgressStart">
+		            <div style="display: block; min-height: 258px;">
+		                <canvas baseChart width="1000" height="700"
+			                [datasets]="lineChartData"
+			                [labels]="lineChartLabels"
+			                [options]="lineChartOptions"
+			                [colors]="lineChartColors"
+			                [legend]="lineChartLegend"
+			                [chartType]="lineChartType"
+			                (chartHover)="chartHovered($event)"
+			                (chartClick)="chartClicked($event)"></canvas>
+		            </div>
+		            <!-- <h2 class="text-success">Loveable Valuable and Capable</h2> -->
+		        <!--</div>
+		        <div *ngIf="!isChartLoading && !isProgressStart">
+		            No Record Found.
+		        </div>
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table table-striped">
+                    <thead class="custom">
+						<tr>
+							<th *ngFor="let obj of data">{{obj._id}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td *ngFor="let obj of data">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Type</th>
+											<th>Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let object of obj.roles">
+											<td>{{object.role == 'B' ? 'Brand' : object.role == 'D' ? 'Dispensary' : object.role == 'DR' ? 'Doctor' : object.role == 'SA' ? 'Super Admin' : object.role == 'DRIVER' ? 'Driver' : 'User'}}</td>
+											<td>{{object.count}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div> -->
+
+</div>

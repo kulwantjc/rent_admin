@@ -1,0 +1,90 @@
+<div class="category-wrapper">
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- section ends  -->
+    <div class="card" *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-3 col-12">
+                    <strong>View Schedule</strong>
+                </div>
+                <div class="col-sm-9 col-12 text-right linehght">
+                    <button type="button" class="btn btn-secondary" [routerLink]="['/scheduler/list']">Back</button>
+                    <button *ngIf="addEditDelete" type="button" class="btn btn-success pull-right" (click)="edit(object.id)">Edit</button>
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="card-block viewmode">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Driver</label>
+                        <p>{{object.driver_id.email}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Driver Replacement</label>
+                        <p>{{object.replace_driver_id ? object.replace_driver_id.email : '-'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Schedule Date</label>
+                        <p>{{object.schedule_date | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="nf-name">Schedule time from</label>
+                        <p>{{object.schedule_time_from}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="nf-name">Schedule time to</label>
+                        <p>{{object.schedule_time_to}}</p>
+                    </div>
+                </div>
+                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Available time from</label>
+                        <p>{{object.availability_time_from ? object.availability_time_from :'-'}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Available time to</label>
+                        <p>{{object.availability_time_to ? object.availability_time_to :'-'}}</p>
+                    </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Created At</label>
+                        <p>{{object.createdAt  | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Updated At</label>
+                        <p>{{object.updatedAt  | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Message</label>
+                        <p>{{object.message ? object.message :'-'}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .card -->
+</div>
+<!-- .category-wrapper -->

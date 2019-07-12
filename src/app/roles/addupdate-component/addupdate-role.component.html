@@ -1,0 +1,130 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- loading section ends  -->
+    <div class="card role" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{roleID ? 'Edit' : 'Add'}} Role</strong>
+        </div>
+        <!-- form to add or update role -->
+        <form role="form" (ngSubmit)="save()" #addRoleForm="ngForm">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Role Name</label>
+                            <input autofocus type="text" id="name" name="name" class="form-control" placeholder="" #name="ngModel" [(ngModel)]="role.name" maxlength="50" (keyup)="trim('name')" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Role name is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <table class="table table-striped">
+                        <thead class="custom">
+                            <th>
+                                Modules
+                            </th>
+                            <th colspan="5" class="text-center">
+                                Permissions
+                            </th>
+                        </thead>
+                        <tbody>
+
+                            <tr class="mediaquerylength">
+                                <td>
+                                    <strong>Modules</strong>
+                                </td>
+                                <td colspan="5" >
+                                   <strong>Permissions</strong>
+                                </td>
+                               
+                            </tr>
+  
+                            <tr>
+                                <td width="20%">
+                                    Users
+                                </td>
+                                <td width="10%">
+                                    <div class="role">
+                                        <input id="userview" name="userview" [(ngModel)]="role.permission.users.view" (change)="autoUpdateRole('users')" type="checkbox">
+                                        <label for="userview">View</label>
+                                    </div>
+                                </td>
+                                <td width="30%">
+                                    <div class="role">
+                                        <input id="userAddEditDelete" name="userAddEditDelete" [(ngModel)]="role.permission.users.addEditDelete" [disabled]="!role.permission.users.view" type="checkbox">
+                                        <label for="userAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="20%">
+                                    Category
+                                </td>
+                                <td width="10%">
+                                    <div class="role">
+                                        <input id="categoryview" name="categoryview" [(ngModel)]="role.permission.category.view" (change)="autoUpdateRole('category')" type="checkbox">
+                                        <label for="categoryview">View</label>
+                                    </div>
+                                </td>
+                                <td width="30%">
+                                    <div class="role">
+                                        <input id="categoryAddEditDelete" name="categoryAddEditDelete" [(ngModel)]="role.permission.category.addEditDelete" [disabled]="!role.permission.category.view" type="checkbox">
+                                        <label for="categoryAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">
+                                    Roles
+                                </td>
+                                <td width="10%">
+                                    <div class="role">
+                                        <input id="adminRolesview" name="adminRolesview" [(ngModel)]="role.permission.adminRoles.view" (change)="autoUpdateRole('adminRoles')" type="checkbox">
+                                        <label for="adminRolesview">View</label>
+                                    </div>
+                                </td>
+                                <td width="30%">
+                                    <div class="role">
+                                        <input id="adminRolesAddEditDelete" name="adminRolesAddEditDelete" [(ngModel)]="role.permission.adminRoles.addEditDelete" [disabled]="!role.permission.adminRoles.view" type="checkbox">
+                                        <label for="adminRolesAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!--<tr>
+                                <td width="20%">
+                                    Settings
+                                </td>
+                                <td width="10%">
+                                    <div class="role">
+                                        <input id="settings" name="settings" [(ngModel)]="role.permission.settings.view" (change)="autoUpdateRole('settings')" type="checkbox">
+                                        <label for="settings">View</label>
+                                    </div>
+                                </td>
+                                <td width="30%">
+                                    <div class="role">
+                                        <input id="settingsAddEditDelete" name="settingsAddEditDelete" [(ngModel)]="role.permission.settings.addEditDelete" [disabled]="!role.permission.settings.view" type="checkbox">
+                                        <label for="settingsAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/roles/list']"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addRoleForm.valid">{{roleID ? 'Update' : 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+</div>

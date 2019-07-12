@@ -1,0 +1,119 @@
+<div class="setting-wrapper">
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- section ends  -->
+    <div class="card" *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-sm-12"> <strong>View Settings</strong> </div>
+            </div>
+        </div>
+        <div class="card-block viewmode tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#fare" role="tab">Fare Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#commission" role="tab">Commission Managemenet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#reward" role="tab">Reward Managemenet</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content bordertabs mb-1">
+                <div class="tab-pane active" id="fare" role="tabpanel">
+                    <div class="col-sm-12">
+                        <button *ngIf="addEditDelete" type="button" class="btn btn-sm btn-danger btn-rounded orange pull-right mb-10 positiontopright" (click)="edit('fare')" title="Edit Settings"><i class="fa fa-pencil"></i></button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header flex-row">
+                            <h5>Fare Charges</h5>
+                        </div>
+                        <div class="card-block">
+                            <div class="row greybg m-0 pt-10 mb-1" *ngFor="let obj of setting.fare_charges;let i=index">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="nf-name">Minimum KM</label>
+                                        <p>{{obj.min}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="nf-name">Maximum KM</label>
+                                        <p>{{obj.max}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="nf-name">Charges</label>
+                                        <p>{{obj.charges}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div class="tab-pane" id="commission" role="tabpanel">
+                    <div class="col-sm-12">
+                        <button *ngIf="addEditDelete" type="button" class="btn btn-sm btn-danger btn-rounded orange pull-right mb-10 positiontopright" (click)="edit('commission')" title="Edit Settings"><i class="fa fa-pencil"></i></button>
+                    </div>
+                    
+                    <div class="card-block pt-0 mt-0">
+                        <div class="row greybg pt-10 pb-0 pl-1 pr-1">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="nf-name">Commission (%)</label>
+                                    <p>{{setting.commission ? setting.commission.admin ? setting.commission.admin : '-':'-'}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="nf-name">Store Commission (%)</label>
+                                    <p>{{setting.commission ? setting.commission.store ? setting.commission.store : '-':'-'}}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="tab-pane" id="reward" role="tabpanel">
+                    <div class="col-sm-12">
+                        <button *ngIf="addEditDelete" type="button" class="btn btn-sm btn-danger btn-rounded orange pull-right mb-10 positiontopright" (click)="edit('reward')" title="Edit Settings"><i class="fa fa-pencil"></i></button>
+                    </div>
+                    
+                    <div class="card-block pt-0 mt-0">
+                        <div class="row greybg pt-10 pb-0 pl-1 pr-1">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="nf-name">Dispensary Reward Points</label>
+                                    <p>{{setting.reward ? setting.reward.dispensary ? setting.reward.dispensary : '-':'-'}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                 <div class="form-group">
+                                    <label for="nf-name">Product Reward Points</label>
+                                    <p>{{setting.reward ? setting.reward.product ? setting.reward.product : '-':'-'}}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- Nav tabs -->
+        </div>
+        <!-- .card -->
+    </div>
+    <!-- .category-wrapper -->
+</div>

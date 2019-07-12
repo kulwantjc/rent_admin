@@ -1,0 +1,21 @@
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav panel-body">
+            <li class="nav-item">
+                <a (click)="active = 'dashboard'" routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link" title="Dashboard"> <i class="icon-dashboard"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+                <a (click)="layout('vehicle-types')" [ngClass]="{'active': active == 'vehicle-types'}" class="nav-link" title="Type of Vehicles"> <i class="fa fa-file-text-o"></i> <span>Type of Vehicles</span> </a>
+            </li>
+            <li class="nav-item" *ngIf="access['category']" [ngClass]="{'not-allowed-custom':!access['category']}">
+                <a (click)="layout('category')" [ngClass]="{'active': active == 'category'}" class="nav-link" title="Category"> <i class="fa fa-file-text-o"></i> <span>Category</span></a>
+            </li>
+            <li class="nav-item">
+                <a (click)="layout('users')" [ngClass]="{'active': active == 'users'}" class="nav-link" title="Users"> <i class="icon-user"></i> <span>Users</span> </a>
+            </li>
+            <li class="nav-item" *ngIf="access['roles']" [ngClass]="{'not-allowed-custom':!access['roles']}">
+                <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a>
+            </li>
+        </ul>
+    </nav>
+</div>

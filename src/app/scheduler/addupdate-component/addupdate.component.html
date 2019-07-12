@@ -1,0 +1,148 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{ID ? 'Update' : 'Add'}} {{type ? 'Driver Replacement' : 'Schedule'}}</strong>
+        </div>
+        <!-- form to add or update crop -->
+        <form role="form" (ngSubmit)="save()" #sendMessageForm="ngForm">
+        <div class="card-block">
+               
+               <div class="row">
+                   
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="driver_id">Driver</label>
+                            <select id="driver_id" name="driver_id" [disabled]="type == 'replacement'" [ngClass]="{'disable':type == 'replacement'}" class="form-control" size="1" #driver_id="ngModel" [(ngModel)]="object.driver_id" required>
+                                <option value="">Please Select</option>                                
+                                <option *ngFor="let obj of business_types" value="{{obj.id}}">
+                                    {{obj.email}}
+                                </option>       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="driver_id.errors?.required && driver_id.touched" class="text-danger">
+                                    Business type is required.
+                                </small>                  
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6" *ngIf="type == 'replacement'">
+                        <div class="form-group has-required">
+                            <label for="replacement">Driver Replacement</label>
+                            <select id="replacement" name="replacement" class="form-control" size="1" #replacement="ngModel" [(ngModel)]="object.replace_driver_id" required>
+                                <option value="">Please Select</option>                                
+                                <option *ngFor="let obj of business_types" value="{{obj.id}}">
+                                    {{obj.email}}
+                                </option>       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="replacement.errors?.required && replacement.touched" class="text-danger">
+                                    Business type is required.
+                                </small>                  
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="schedule_date">Schedule date</label>
+                            <div class="input-group">
+
+                                <input readonly class="form-control" id="schedule_date" style="float:none" placeholder="dd/mm/yyyy" ngx-mydatepicker name="schedule_date"
+                                      #schedule_date="ngModel"  [(ngModel)]="object.schedule_date" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)" required>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default noborderradius" (click)="dp.toggleCalendar()">
+                                        <i class="fa fa-calendar-plus-o"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="schedule_date.errors?.required && schedule_date.touched" class="text-danger">
+                                   Schedule date is required.
+                                </small>             
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-sm-3">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Schedule From</label>
+                            <input autofocus type="text" id="schedule_time_from" name="schedule_time_from" class="form-control" placeholder="" (keyupna)="trim('schedule_time_from')" #schedule_time_from="ngModel" [ngModel]="object.schedule_time_from" (ngModelChange)="object.schedule_time_from=$event" required>
+                            <div class="error-block">
+                                <small *ngIf="schedule_time_from.errors?.required && schedule_time_from.touched" class="text-danger">
+                                    Schedule From required.
+                                </small>   
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Schedule To</label>
+                            <input autofocus type="text" id="schedule_time_to" name="schedule_time_to" class="form-control" placeholder="" (keyupna)="trim('schedule_time_to')" #schedule_time_to="ngModel" [ngModel]="object.schedule_time_to" (ngModelChange)="object.schedule_time_to=$event" required>
+                            <div class="error-block">
+                                <small *ngIf="schedule_time_to.errors?.required && schedule_time_to.touched" class="text-danger">
+                                    Schedule To required.
+                                </small>   
+                            </div>    
+                        </div>                            
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="city">City</label>
+                            <select id="city" name="city" class="form-control" size="1" #city="ngModel" [(ngModel)]="object.city" required="">
+                                <option value="">Please select</option>                                
+                                <option *ngFor="let obj of cities" value="{{obj}}">
+                                    {{obj}}
+                                </option>       
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="!ID">
+                        <div class="form-group has-required">
+                            <label for="days">Schedule Period</label>
+                            <select id="days" name="days" [disabled]="type == 'replacement'" [ngClass]="{'disable':type == 'replacement'}" class="form-control" size="1" #days="ngModel" [(ngModel)]="object.day" required>
+                                <option value="1">One Day</option>                                
+                                <option value="7">Weekly</option>                                
+                                <option value="30">Monthly</option>                                
+                                <!-- <option *ngFor="let obj of business_types" value="{{obj.id}}">
+                                    {{obj.email}}
+                                </option>        -->
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="days.errors?.required && days.touched" class="text-danger">
+                                    Business type is required.
+                                </small>                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                              
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="nf-desc">Message</label>
+                            <textarea type="text" id="message" name="message" class="form-control" [(ngModel)]="object.message" placeholder="" (keyup)="trim('message')" rows="2"></textarea> 
+                        </div>
+                    </div>
+                </div>
+              
+              
+        </div>
+
+        <!-- <image-popup [popupImagePath]="popupImagePath"></image-popup> -->
+
+        <div class="card-footer">
+                    <button type="reset" class="btn btn-secondary whiteclr" (click)="_commanService.back()"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!sendMessageForm.valid">Save</button>
+                </div>
+          </form>
+    </div>
+</div>

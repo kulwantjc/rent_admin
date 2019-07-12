@@ -1,0 +1,152 @@
+<div class="category-wrapper">
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>Edit Settings</strong>
+        </div>
+        
+         <form role="form" (ngSubmit)="save()" #addCatgForm="ngForm">
+        <div class="card-block tabs">
+             
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" id="fareTAB" href="#faremanagement" role="tab">Fare Management</a>
+				</li>
+                <li class="nav-item">
+                <a class="nav-link " data-toggle="tab" id="commissionTAB" href="#commission" role="tab">Commission Managemenet</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link " data-toggle="tab" id="rewardTAB" href="#reward" role="tab">Reward Managemenet</a>
+                </li>
+				
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content bordertabs">
+
+                <div class="tab-pane active" id="faremanagement" role="tabpanel">
+
+            <div class="card">
+              <div class="card-header flex-row">
+                 <div class="d-inline-flex"> <h5>Fare Charges</h5></div>
+                 <div class="pointer-custom d-inline-flex pull-right"><b><i class="fa fa-plus" (click)="addFareCharges()"></i></b></div>
+              </div>
+                  
+                <div class="card-block m-1 pt-0 mt-1">
+                        
+                    <div class="row greybg pt-10 pb-0 pl-1 pr-1" *ngFor="let obj of setting.fare_charges;let i=index">
+                                   
+                        <div class="col-sm-12">
+                        <button (click)="removeFareCharges(i)" class="btn btn-sm btn-danger btn-rounded orange pull-right positiontopright" title="Delete"><i class="fa fa-trash"></i></button>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="form-group has-required">
+                                <label for="nf-name">Minimum KM</label>
+                                <input type="number"  oninput="validity.valid||(value='');" step="0.01" min="0" id="label{{i}}" name="label{{i}}" class="form-control" [(ngModel)]="obj.min">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group has-required">
+                                <label for="nf-name">Maximum KM</label>
+                                <input type="number" oninput="validity.valid||(value='');" step="0.01" min="0" id="percentage{{i}}" name="percentage{{i}}" class="form-control" [(ngModel)]="obj.max">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group has-required">
+                                <label for="nf-name">Charges</label>
+                                <input type="number" min="1" id="days{{i}}" name="days{{i}}" class="form-control" [(ngModel)]="obj.charges">
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+			<div class="tab-pane" id="commission" role="tabpanel">
+				<div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Commission (%)</label>
+                            <input autofocus type="number" (keydown.space)="$event.preventDefault()"  min="0" max="100" id="adminCharge" name="adminCharge" class="form-control" step="0.01" #adminCharge="ngModel" [(ngModel)]="setting.commission.admin" required>
+                            <div class="error-block">
+                                <small *ngIf="adminCharge.errors?.required && adminCharge.touched" class="text-danger">
+                                    instaLeaf Commission (%) is required.
+                                </small>
+                                <small *ngIf="adminCharge.errors?.max && adminCharge.touched" class="text-danger">
+                                    Maximum (%) is 100.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Store Commission (%)</label>
+                            <input autofocus type="number" (keydown.space)="$event.preventDefault()"  min="0" max="100" id="storeComission" name="storeComission" class="form-control" step="0.01" #storeComission="ngModel" [(ngModel)]="setting.commission.store" required>
+                            <div class="error-block">
+                                <small *ngIf="storeComission.errors?.required && storeComission.touched" class="text-danger">
+                                    Store Commission (%) is required.
+                                </small>
+                                <small *ngIf="storeComission.errors?.max && storeComission.touched" class="text-danger">
+                                    Maximum (%) is 100.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                                  
+                </div>
+			</div>
+
+            <div class="tab-pane" id="reward" role="tabpanel">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Dispensary Reward Point</label>
+                            <input autofocus type="number" (keydown.space)="$event.preventDefault()"  min="0" id="dispensaryReward" name="dispensaryReward" class="form-control" step="0.01" #dispensaryReward="ngModel" [(ngModel)]="setting.reward.dispensary" required>
+                            <div class="error-block">
+                                <small *ngIf="dispensaryReward.errors?.required && dispensaryReward.touched" class="text-danger">
+                                    Field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Product Reward Point</label>
+                            <input autofocus type="number" (keydown.space)="$event.preventDefault()"  min="0" id="strainReward" name="strainReward" class="form-control" step="0.01" #strainReward="ngModel" [(ngModel)]="setting.reward.product" required>
+                            <div class="error-block">
+                                <small *ngIf="strainReward.errors?.required && strainReward.touched" class="text-danger">
+                                    Field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                                    
+                                  
+                </div>
+            </div>
+			
+			
+			</div>
+	
+		</div>
+        
+          <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/settings/list']"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addCatgForm.valid">Update</button>
+            </div>
+        </form>
+        
+    </div>
+    <!-- .card -->
+</div>
+<!-- .category-wrapper -->

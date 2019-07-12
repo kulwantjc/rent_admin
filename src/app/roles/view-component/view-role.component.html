@@ -1,0 +1,137 @@
+<div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card role"  *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                   <strong>View Role</strong>           
+                </div>
+                <div class="col-sm-6 col-12 text-right linehght">
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/roles/list']">Back</button>  
+
+                    <button *ngIf="addEditDelete && role.isEditable" type="button" class="btn btn-success pull-right" (click)="editRole(role.id)">Edit Role</button> 
+                                             &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="card-block viewmode">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">Role Name</label>
+						<p>{{role.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                    <table class="table table-striped" >
+                        <thead class="custom">
+                            <th>
+                                Modules
+                            </th>
+                            <th colspan="5" class="text-center">
+                                Permissions
+                            </th>
+                        </thead>
+                        <tbody>
+                            
+                            <tr *ngIf="role.permission.users.view">
+                                <td width="40%" data-label="Crops">
+                                    Users
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="userview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.users.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <label for="userAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.category.view">
+                                <td width="40%" data-label="Crops">
+                                    Category
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="categoryview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.category.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <label for="categoryAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.adminRoles.view">
+                                <td width="40%" data-label="Crops">
+                                    Roles
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="adminRolesview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.adminRoles.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                       <label for="adminRolesAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.adminUsers.view">
+                                <td width="40%" data-label="Crops">
+                                    Store Admin
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="adminUsersview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.adminUsers.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <label for="adminUsersAddEditDelete">Add/Edit</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.news.view">
+                                <td width="40%" data-label="News">
+                                    News
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="newsview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.news.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <label for="newsAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="role.permission.settings.view">
+                                <td width="40%" data-label="Crops">
+                                    Settings
+                                </td>
+                                <td width="20%" data-label="View">
+                                    <div class="role">
+                                        <label for="blogsview">View</label>
+                                    </div>
+                                </td>
+                                <td width="20%" *ngIf="role.permission.settings.addEditDelete" data-label="Add/Edit/Delete">
+                                    <div class="role">
+                                        <label for="blogsAddEditDelete">Add/Edit/Delete</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>   
+</div>

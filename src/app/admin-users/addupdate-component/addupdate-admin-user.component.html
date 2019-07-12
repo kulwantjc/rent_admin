@@ -1,0 +1,125 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{userID ? 'Edit' : 'Add'}} Store Admin</strong>
+        </div>
+        <!-- form to add or update user -->
+        <form role="form" (ngSubmit)="save()" #addUserForm="ngForm">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-fname">First Name</label>
+                            <input autofocus type="text" id="firstName" name="firstName" class="form-control" placeholder="" #firstName="ngModel" [(ngModel)]="user.firstName" (keyup)="trim('firstName')" required>
+                            <div class="error-block">
+                                <small *ngIf="firstName.errors?.required && firstName.touched" class="text-danger">
+                                    First Name is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-lname">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="" #lastName="ngModel" [(ngModel)]="user.lastName" (keyup)="trim('lastName')" required>
+                            <div class="error-block">
+                                <small *ngIf="lastName.errors?.required && lastName.touched" class="text-danger">
+                                    Last Name is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-fname">Username</label>
+                            <input autofocus type="text" id="username" name="username" class="form-control" placeholder="" #username1="ngModel" [(ngModel)]="user.username1" (keyup)="trim('username1')" required>
+                            <div class="error-block">
+                                <small *ngIf="username.errors?.required && username.touched" class="text-danger">
+                                    Username is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-mobile">Mobile</label>
+                            <input type="number" id="mobile" name="mobile" class="form-control" #mobile="ngModel" [(ngModel)]="user.mobile" placeholder="" required="" min="1000000000" max="9999999999" required>
+                            <div class="error-block">
+                                <small *ngIf="mobile.errors?.required && mobile.touched" class="text-danger">
+                                    Mobile is required.
+                                </small>
+                                <small *ngIf="mobile.errors?.min && mobile.touched" class="text-danger">
+                                    Minimum 10 digit allow.
+                                </small>
+                                <small *ngIf="mobile.errors?.max && mobile.touched" class="text-danger">
+                                    Maximum 10 digit allow.
+                                </small>
+                                <small *ngIf="mobile.errors?.pattern && mobile.touched" class="text-danger">
+                                    Mobile is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" *ngIf="!userID">
+                        <div class="form-group has-required">
+                            <label>Email</label>
+                            <div class=" flex input-group">
+                                <input type="text" id="email" name="email" class="form-control" placeholder="" aria-label="Recipient's username"  #email="ngModel" [(ngModel)]="user.email" required="" pattern="[a-zA-Z][a-zA-Z0-9.^*()\s]*" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                  <!-- <span class="input-group-text" id="basic-addon2">@instaleaf.ca</span> -->
+                                </div>
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="email.errors?.required && email.touched" class="text-danger">
+                                    Email is required.
+                                </small>
+                                <small *ngIf="email.errors?.pattern && email.touched" class="text-danger">
+                                    Email is not valid.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="col-sm-6" *ngIf="userID">
+                        <div class="form-group has-required">
+                            <label for="nf-email">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" [disabled]="userID" #email="ngModel" [(ngModel)]="user.email" placeholder="" email required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="role">Role</label>
+                            <select id="role" name="role" #role="ngModel" [(ngModel)]="user.roleID" placeholder=""  class="form-control" size="1" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let role of roles" value="{{role.id}}">
+                                    {{role.name}}
+                                </option>                                       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="role.errors?.required && role.touched" class="text-danger">
+                                    Role is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" (click)="_commanService.back()"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addUserForm.valid" >{{userID ? 'Update' : 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+</div>

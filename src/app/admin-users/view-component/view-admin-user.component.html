@@ -1,0 +1,79 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- section ends  -->
+    <div class="row" *ngIf="!isPageLoading">
+        <div class="col-sm-12 col-md-9 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 col-10">
+                            <strong>View Store Admin</strong>
+                        </div>
+                        <div class="col-sm-6 col-2 text-right custombuttons linehght">
+                            <button class="btn btn-secondary btn-rounded pull-right widthset" type="button" (click)="_commanService.back()" >
+                                <i class="fa fa-arrow-left"></i>
+                       </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block userdetail">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th width="20%">Name</th>
+                                    <td data-label="Name">{{user.firstName}} {{user.lastName}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Username</th>
+                                    <td data-label="Username">{{user.username1}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Email</th>
+                                    <td data-label="Email">{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Mobile</th>
+                                    <td data-label="Mobile">{{user.mobile}}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <th width="20%">Address</th>
+                                    <td data-label="Address">{{user.address}} {{user.address ? ',':''}} {{user.city}}{{user.city ? ',':''}} {{user.district}} {{user.district ? ',':''}} {{user.state}} {{user.state ? ',':''}} {{user.pincode}}</td>
+                                </tr> -->
+                                <tr *ngIf="user.roles !== 'SA'">
+                                    <th width="20%">Role</th>
+                                    <td data-label="Role">{{roleName(user?.roleId)}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">User Type</th>
+                                    <td data-label="Modified on">{{user.roles =='SA'?'Super Admin' : 'Store Admin'}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Registered on</th>
+                                    <td data-label="Registered on">{{user.createdAt | date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Modified on</th>
+                                    <td data-label="Modified on">{{user.updatedAt | date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-12">
+            <div class="card actions"*ngIf="addEditDelete">
+                <h2>Actions</h2>
+                <ul>
+                    <li style="cursor:pointer;" (click)="editUser(user.id)"><span>Edit Admin User</span></li>
+                    <li style="cursor:pointer;" (click)="changeStatus(user)"><span>{{user.status == 'active' ? 'Activated' : 'Deactivated'}} Admin User</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

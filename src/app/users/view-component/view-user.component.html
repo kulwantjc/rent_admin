@@ -1,0 +1,107 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- section ends  -->
+    <div class="row" *ngIf="!isPageLoading">
+        <div class="col-sm-12 col-md-9 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 col-10">
+                            <strong>View User</strong>
+                        </div>
+                        <div class="col-sm-6 col-2 text-right custombuttons linehght">
+                            <button class="btn btn-secondary btn-rounded pull-right widthset" type="button" (click)="_commanService.back()" >
+								<i class="fa fa-arrow-left"></i>
+                       </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block userdetail">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th width="20%">Name</th>
+                                    <td data-label="Name">{{user.firstName}} {{user.lastName}}</td>
+                                </tr>
+                                <tr *ngIf="user.sellerCode && user.roles=='U'">
+                                    <th width="20%">Seller Code</th>
+                                    <td data-label="Name">{{user.sellerCode}}</td>
+                                </tr>
+                                <tr *ngIf="user.sellerCode  && user.roles=='FGM'">
+                                    <th width="20%">Franchisee Code</th>
+                                    <td data-label="Name">{{user.sellerCode}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Email</th>
+                                    <td data-label="Email">{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Mobile</th>
+                                    <td data-label="Mobile">{{user.mobile}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Address</th>
+                                    <td data-label="Address">{{user.address}} {{user.address ? ',':''}} {{user.city}}{{user.city ? ',':''}} {{user.district}} {{user.district ? ',':''}} {{user.state}} {{user.state ? ',':''}} {{user.pincode}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Registered on</th>
+                                    <td data-label="Registered on">{{user.createdAt | date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="20%">Modified on</th>
+                                    <td data-label="Modified on">{{user.updatedAt | date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                               <!-- <tr>
+                                    <th width="20%">Profile Image</th>
+                                    <td data-label="Profile Image">
+                                        <div class="thumbnail" *ngIf="!user.image">
+                                            <img src="http://www.vacationrentalestates.com/images/no-image-available2.jpg"> 
+                                        </div>
+                                        <div class="thumbnail pointer-custom" *ngIf="user.image" (click)="viewImage(_host+'/images/users/'+user.image)">
+                                            <img src="{{_host}}/images/users/thumbnail/200/{{user.image}}">
+                                        </div>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3 col-12">
+            <div class="card actions mt-0 pt-0">
+               
+               <div class="imageblock blurred relative m-1">
+               	    <img *ngIf="!user.image" class="img-fluid width100" src="http://www.vacationrentalestates.com/images/no-image-available2.jpg"> 
+               	    
+               	      <img *ngIf="user.image" class="img-fluid width100" src="{{_host}}/images/users/thumbnail/200/{{user.image}}">
+               	      
+               	    <div class="absolute">
+              	    	<div class="imageblock border-0 no-shadow" *ngIf="!user.image">
+               	    	  <img class="img-circle small" src="http://www.vacationrentalestates.com/images/no-image-available2.jpg"> 
+               	        </div>
+               	        <div class="imageblock border-0 no-shadow" *ngIf="user.image">
+               	    	  <img class="img-circle small" src="{{_host}}/images/users/thumbnail/200/{{user.image}}">
+               	        </div>
+               	       
+               	         
+						<h3>
+							{{user.firstName}} {{user.lastName}}
+						</h3>
+                    </div>
+               </div>
+               
+                <h2 *ngIf="addEditDelete">Actions</h2>
+                <ul *ngIf="addEditDelete">
+                    <li style="cursor:pointer;" (click)="editUser(user.id)"><span>Edit User</span></li>
+                    <li style="cursor:pointer;" (click)="changeStatus(user)"><span>{{user.status == 'active' ? 'Activated' : 'Deactivated'}} User</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

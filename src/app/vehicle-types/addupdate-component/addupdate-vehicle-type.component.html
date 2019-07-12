@@ -1,0 +1,40 @@
+<div class="category-wrapper">
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>
+    </div>
+    <!-- loading section ends  -->
+    <ngx-flash-messages></ngx-flash-messages>
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{typeID ? 'Edit' : 'Add'}} Vehicle Type</strong>
+        </div>
+        <form role="form" (ngSubmit)="save()" #addTypeForm="ngForm">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group  has-required">
+                            <label for="nf-name">Name of Vehicle Type</label>
+                            <input autofocus type="text" id="name" name="name" class="form-control" placeholder="" minlength="3" maxlength="50" (keyup)="trim('name')" #name="ngModel" [ngModel]="vtypes.name | capitalize" (ngModelChange)="vtypes.name=$event" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>
+                                <small *ngIf="name.errors?.minlength && name.touched" class="text-danger">
+                                    Minumum length should be 3.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/vehicle-types/list']"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addTypeForm.valid">{{typeID ? 'Update' : 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- .card -->
+</div>
+<!-- .category-wrapper -->

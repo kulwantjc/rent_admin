@@ -1,0 +1,58 @@
+<header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+    <a class="navbar-brand hidden-md-down" href="#{{defaultDashboard}}" (click)="active='dashboard'"></a>
+    <ul class="nav navbar-nav hidden-md-down width EKDPS2032B06011991">
+        <li class="nav-item">
+            <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#/notifications/list" title="Messages"><i class="fa fa-bell"></i>
+      <span class="badge badge-pill badge-danger">{{notificationCount > 0 ? notificationCount > 99 ? '99+': notificationCount : '' }}</span>
+       </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#/messages/list" title="Messages"><i class="fa fa-envelope"></i>
+      <span class="badge badge-pill badge-danger">{{messages > 0 ? messages > 99 ? '99+': messages : '' }}</span>
+       </a>
+        </li>
+        <li class="nav-item dropdown removedropdwn" dropdown (onToggle)="toggled($event)">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+                <img src="assets/img/avatars/default-avatar.png" class="img-avatar" alt="profile image">
+                <i class="fa fa-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" [routerLink]="['/profile/myprofile']"><i class="fa fa-user"></i> Profile</a>
+                <a class="dropdown-item" [routerLink]="['/settings']"><i class="fa fa-wrench"></i> Setting</a>
+                <div class="divider"></div>
+                <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-lock"></i> Logout</a>
+            </div>
+        </li>
+    </ul>
+</header>
+<div class="app-body">
+    <!-- Sidebar -->
+    <sidebar [access]="access" [active]="active" [defaultDashboard]="defaultDashboard" [acessDashboard]="acessDashboard" [adminType]="adminType" (Layout)="layout($event)"></sidebar>
+    <!-- Main content -->
+    <main class="main">
+        <div class="mainarea">
+            <!-- top sub header -->
+            <!-- <sub-header [access]="access" [active]="active" (Layout)="layout($event)"></sub-header> -->
+            <div class="main-content">
+                <div class="content-header">
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb">
+                        <breadcrumbs></breadcrumbs>
+                    </ol>
+                </div>
+                <ngx-flash-messages></ngx-flash-messages>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <!-- /.conainer-fluid -->
+    </main>
+</div>
+
+<!-- <footer class="app-footer">
+</footer> -->
