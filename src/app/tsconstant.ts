@@ -1,7 +1,7 @@
 'use strict';
 
 
-export const HOST: string = "http://localhost:1337";
+export const HOST: string = "http://52.14.65.48:1337";
 
 export const CLIENT_ID: string = '5x7EuN09HAeBn2pYJnvvq7szgJaULh14'
 export const GRANT_TYPE: string = "password";
