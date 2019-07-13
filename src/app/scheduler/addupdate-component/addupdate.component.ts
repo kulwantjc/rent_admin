@@ -46,21 +46,6 @@ export class AddUpdateComponent {
         this.type = _activateRouter.snapshot.queryParams['type'];
         if(this.ID) this.fetch();
         this.getUsers();
-        this.allCities();
-    }
-
-    allCities() {
-        this._commanService.allCities().subscribe(res => {
-            if(res.success) {
-                let data = res.data.data
-                for (var i = 0; i < data.length; ++i) {
-                    // code...
-                this.cities.push(data[i].name);
-                }
-            }
-        },err => {
-            this.isLoading = false;
-        });
     }
 
     fetch() {

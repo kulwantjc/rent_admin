@@ -52,14 +52,10 @@ export class AddupdateCityComponent implements OnInit {
         } else {
             this.isPageLoading = false;
         }
-
-
     }
 
   	ngOnInit(): void {
-
         this.showDangerAlert();
-        this.allProvinces()
     }
 
     save() {
@@ -96,17 +92,6 @@ export class AddupdateCityComponent implements OnInit {
             });
             
         }
-    }
-
-    allProvinces() {
-        this._commanService.allProvinces().subscribe(res => {
-                this.isLoading = false;
-                if(res.success) {
-                    this.province = res.data.city;
-                }
-            },err => {
-                this.isLoading = false;
-            })
     }
 
     showDangerAlert(): void {

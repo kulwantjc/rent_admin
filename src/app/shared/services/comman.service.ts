@@ -7,8 +7,6 @@ import { FullLayoutService } from '../../layouts/full-layout.service';
 import tsConstants = require('./../../tsconstant');
 import tsMessages = require('./../../tsmessage');
 import { Location } from '@angular/common';
-import { Angular2Csv } from 'angular2-csv/Angular2-csv';
-declare let jsPDF; 
 
 @Injectable()
 export class CommanService {
@@ -68,15 +66,15 @@ export class CommanService {
         return this._http.post(this._host +'/upload', object, { headers: headers }).map((res:Response) => res.json())
     }
 
-    uploadCSV(object) {
-        let headers = this.getAuthorizationHeader();
-        return this._http.post(this._host +'/bulkUpload', object, { headers: headers }).map((res:Response) => res.json())
-    }
+    // uploadCSV(object) {
+    //     let headers = this.getAuthorizationHeader();
+    //     return this._http.post(this._host +'/bulkUpload', object, { headers: headers }).map((res:Response) => res.json())
+    // }
 
-    uploadProductCSV(object) {
-        let headers = this.getAuthorizationHeader();
-        return this._http.post(this._host +'/bulkProductUpload', object, { headers: headers }).map((res:Response) => res.json())
-    }
+    // uploadProductCSV(object) {
+    //     let headers = this.getAuthorizationHeader();
+    //     return this._http.post(this._host +'/bulkProductUpload', object, { headers: headers }).map((res:Response) => res.json())
+    // }
 
     /*Use to fetch all categories*/
     getAllCategories() {
@@ -94,13 +92,6 @@ export class CommanService {
         let headers = this.getAuthorizationHeader();
         let url = this._host + '/activeuser?roles='+ role+'&multipleroles='+multipleRoles;
         return this._http.get(url, { headers: headers }).map((res:Response) => res.json());
-    }
-
-    /*Use to fetch all States*/
-    getStates() {
-
-        let headers = this.getAuthorizationHeader();
-        return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
 
     /*Use to soft delete any Record */
@@ -160,51 +151,5 @@ export class CommanService {
         }
 
         return date;
-    }
-
-    allCities(){
-        let headers = this.getAuthorizationHeader();
-        return this._http.get(this._host+'/allcities', { headers: headers }).map((res:Response) => res.json())
-    }
-
-    allProvinces(){
-        let headers = this.getAuthorizationHeader();
-        return this._http.get(this._host+'/allprovinces', { headers: headers }).map((res:Response) => res.json())
-    }
-
-    downloadCSV( name, filteredData ) {
-
-        let fileName = name + "-" + Math.floor(Date.now() / 1000); 
-        new Angular2Csv( filteredData, fileName);
-
-    }
-    
-    downloadPDF( name, header, filteredData ) {
-        
-        var doc = new jsPDF();    
-        let fileName = name + "-" + Math.floor(Date.now() / 1000); 
-
-        doc.autoTable(header, filteredData,  {
-            theme: 'grid',
-            headerStyles: {fillColor: 0},
-            startY: 10, // false (indicates margin top value) or a number 
-            margin: {horizontal: 7}, // a number, array or object 
-            pageBreak: 'auto', // 'auto', 'avoid' or 'always' 
-            tableWidth: 'wrap', // 'auto', 'wrap' or a number,  
-            tableHeight: '1', // 'auto', 'wrap' or a number,  
-            showHeader: 'everyPage',
-            tableLineColor: 200, // number, array (see color section below) 
-            tableLineWidth: 0,
-            fontSize: 10,
-            overflow : 'linebreak',
-            columnWidth : 'auto',
-            cellPadding : 2,       
-            cellSpacing : 0,       
-            valign : 'top',
-            lineHeight: 15, 
-
-        });
-
-        doc.save(fileName);
     }
 }
