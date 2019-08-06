@@ -1,0 +1,71 @@
+<div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <!-- loading section -->
+    <div class="aligncenter_loader" 
+    *ngIf="isPageLoading">
+        <div class="is-loading">
+        <i class="page-loader"></i>
+    </div>
+    </div><!-- loading section ends  -->
+<div class="card" *ngIf="!isPageLoading">
+    <div class="card-header">
+        <strong>Update User</strong>
+    </div>
+    <!-- form to add or update user -->
+<form role="form" (ngSubmit)="save()" #editUserForm="ngForm">
+    <div class="card-block">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group has-required">
+                    <label for="nf-fname">First Name</label>
+                    <input autofocus="autofocus" type="text" id="firstName" name="firstName" class="form-control" placeholder="" #firstName="ngModel" [ngModel]="user.firstName  | capitalize" (ngModelChange)="user.firstName=$event" (keyup)="trim('firstName')"  required>
+                    <div class="error-block">
+                        <small *ngIf="firstName.errors?.required && firstName.touched" class="text-danger">
+                            First Name is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group has-required">
+                    <label for="nf-lname">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="" #lastName="ngModel" [ngModel]="user.lastName  | capitalize" (ngModelChange)="user.lastName=$event" (keyup)="trim('lastName')" required>
+                    <div class="error-block">
+                        <small *ngIf="lastName.errors?.required && lastName.touched" class="text-danger">
+                            Last Name is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group has-required">
+                    <label for="nf-email">Email</label>
+                    <input type="text" id="email" name="email" class="form-control"[disabled]="userID" #email="ngModel" [(ngModel)]="user.email" placeholder="" email required>
+                    <div class="error-block">
+                        <small *ngIf="email.errors?.required && email.touched" class="text-danger">
+                            Email is required.
+                        </small>
+                        <small *ngIf="email.errors?.email && email.touched" class="text-danger">
+                            Email is not valid.
+                        </small>
+                        <small *ngIf="email.errors?.pattern && email.touched" class="text-danger">
+                            Email is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+           <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!editUserForm.valid" [class.disabled]="isClickedOnce">{{userID ? 'Update' : 'Save'}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>  
+
+
+
+                  

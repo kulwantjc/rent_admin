@@ -61,7 +61,7 @@ export class CommanService {
 
     /*Use to add new image*/
     uploadImage(object) {
-
+        console.log("old function check",object);
         let headers = this.getAuthorizationHeader();
         return this._http.post(this._host +'/upload', object, { headers: headers }).map((res:Response) => res.json())
     }
@@ -152,4 +152,7 @@ export class CommanService {
 
         return date;
     }
+
+   
+  
 }

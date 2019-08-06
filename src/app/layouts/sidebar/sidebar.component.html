@@ -16,6 +16,12 @@
             <li class="nav-item" *ngIf="access['roles']" [ngClass]="{'not-allowed-custom':!access['roles']}">
                 <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a>
             </li>
+            <li class="nav-item">
+                <a (click)="layout('option-management')" [ngClass]="{'active': active == 'option-management'}" class="nav-link" title="option-management"> <i class="icon-user"></i> <span>Option-management</span> </a>
+            </li>
+            <li class="nav-item">
+                <a (click)="layout('test-management')" [ngClass]="{'active': active == 'test-management'}" class="nav-link" title="test-management"><span>Testmanagement</span> </a>
+            </li>
         </ul>
     </nav>
 </div>

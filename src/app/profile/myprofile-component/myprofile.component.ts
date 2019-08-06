@@ -58,6 +58,12 @@ export class MyprofileComponent implements OnInit {
         });
   }
 
+  editProfile(userID) { 
+    console.log(userID);    
+    let route = '/profile/editprofile/'+ userID;
+    this._router.navigate([route]);       
+}
+
     getCurrentUser(){
         this.errMessage        = '';  
         this.isPageLoading = false;

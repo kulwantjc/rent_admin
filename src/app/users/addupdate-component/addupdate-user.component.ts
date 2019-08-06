@@ -1,5 +1,7 @@
 import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { RoleService } from '../../roles/services/role.service';
+
 import { CommanService } from '../../shared/services/comman.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ViewUserImageComponent } from '../../modals/view-image/viewUserImage.component';
@@ -17,12 +19,14 @@ export class AddUpdateUserComponent {
     private _host = tsConstants.HOST;
     
     public user = {
-        status:'active'
+        status:'active',
+        type:''
     };
     public isLoading       = false;
     public isPageLoading   = true;
     public userID:any;
     public states: any;
+    public type = [];
     public districts: any;
     public errMessage      = '';
 
@@ -30,6 +34,8 @@ export class AddUpdateUserComponent {
         private _router : Router, 
         private _activateRouter: ActivatedRoute, 
         private _userService: UserService, 
+        private _roleService: RoleService, 
+       
         private _commanService: CommanService, 
         private changeDetectorRef: ChangeDetectorRef,
         private _dialogService: DialogService ) { 
@@ -50,14 +56,19 @@ export class AddUpdateUserComponent {
         } else {
             this.isPageLoading = false;
         }
+        this.listRolesTypes()
     } 
 
     /*If useID exist then will update existing user otherwise will add new user*/
     save() {
+        //alert("hello");
         this.isLoading = true;
         if(this.userID) {
+
+            console.log("test user",this.user);
             this.user["username"] = this.user["email"];
             this._userService.update(this.user).subscribe(res => {
+
                 if(res.success) {                    
                     this.isLoading = false;
                     this._commanService.showAlert(tsMessages.RECORD_UPDATED_SUCCESSFULLY,'alert-success');
@@ -85,6 +96,30 @@ export class AddUpdateUserComponent {
             });
         }
     }
+
+//kulwant code start 16-7-2019
+
+listRolesTypes() {
+    this._roleService.allRolesTypes().subscribe(res => {
+        //console.log(" role type",res)
+        
+        if(res.success) {
+            let data = res.data.data
+           //console.log("testing",data);
+            for (var i = 0; i<data.length; ++i) {
+            this.type.push(data[i].name);
+            }
+
+        } else {
+            this._commanService.checkAccessToken(res.error);
+            this._commanService.showAlert(res.error.message,'alert-danger');
+        }
+    },err => {
+        this.isLoading = false;
+    });
+}
+
+//kulwant code end 16-7-2019
 
     trim(key) {
         if(this.user[key] && this.user[key][0] == ' ') this.user[key] = this.user[key].trim();

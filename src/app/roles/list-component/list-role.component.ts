@@ -41,7 +41,6 @@ export class ListRoleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        
         this._router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;

@@ -76,6 +76,14 @@ export const routes: Routes = [
       {
         path: 'vehicle-types',
         loadChildren: './vehicle-types/vehicle-types.module#VehicleTypesModule'      
+      },
+      {
+        path: 'option-management',
+        loadChildren: './option-management/option-management.module#OptionManagementModule'      
+      },
+      {
+        path: 'test-management',
+        loadChildren: './test-management/test-management.module#TestManagementModule'      
       }
     ]
   }

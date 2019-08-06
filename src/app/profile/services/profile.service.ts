@@ -21,6 +21,16 @@ export class ProfileService {
         return this._http.get(this._host+'/users/current', { headers: headers }).map((res:Response) => res.json())
     }
 
+    get(userid) {
+        let headers = this._commanService.getAuthorizationHeader();
+        return this._http.get(this._host +'/user/'+ userid, { headers: headers }).map((res:Response) => res.json())
+    }
+
+    updateProfile(user) {
+        let headers = this._commanService.getAuthorizationHeader();
+        return this._http.put(this._host +'/updateprofile/', user, { headers: headers }).map((res:Response) => res.json())
+    }
+
     changePassword(userData) {
 
         let headers = this._commanService.getAuthorizationHeader();

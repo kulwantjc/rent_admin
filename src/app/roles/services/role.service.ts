@@ -49,4 +49,11 @@ export class RoleService {
         let headers = this._commanService.getAuthorizationHeader();
         return this._http.delete(this._host +'/permission/'+ roleID, { headers: headers }).map((res:Response) => res.json())
     }
+
+    allRolesTypes(){
+        //console.log("in role serviec");
+        let headers = this._commanService.getAuthorizationHeader();
+        return this._http.get(this._host+'/listrolestype', { headers: headers })
+        .map((res:Response) => res.json())
+   }
 }

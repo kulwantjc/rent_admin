@@ -10,6 +10,7 @@ import { EqualValidator } from '../profile/equal-validator.directive';
 import { CommanService } from '../shared/services/comman.service';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ng2-bootstrap/modal';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ModalModule } from 'ng2-bootstrap/modal';
   declarations: [
     ChangePasswordComponent,
     MyprofileComponent,
-    EqualValidator    
+    EqualValidator,
+    EditprofileComponent,    
   ]
 })
 export class ProfileModule { }

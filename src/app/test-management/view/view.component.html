@@ -1,0 +1,33 @@
+<div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card role"  *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                   <strong>View test</strong>           
+                </div>
+                <div class="col-sm-6 col-12 text-right linehght">
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/test-management/list']">Back</button>  
+
+                    <button *ngIf="addEditDelete && test.isEditable" type="button" class="btn btn-success pull-right" (click)="editTest(test.id)">Edit Test</button> 
+                                             &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="card-block viewmode">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nf-name">firstName</label>
+						<p>{{test.firstName}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+    </div>
+</div>

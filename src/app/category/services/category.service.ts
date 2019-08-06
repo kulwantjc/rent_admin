@@ -15,6 +15,7 @@ export class CategoryService {
 
     /*Use to fetch all Inputs*/
   	getAllCategory(rowsOnPage, activePage, sortTrem , search = '') {
+          //console.log("catekulwant",rowsOnPage,activePage,sortTrem,search);
         let date =  new Date().getTime().toString();
   		let url = this._host +'/allcategory?count='+rowsOnPage+'&page='+activePage+'&sortBy='+sortTrem+'&search='+search+'&date='+date;
 

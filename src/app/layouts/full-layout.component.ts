@@ -25,7 +25,9 @@ export class FullLayoutComponent implements OnInit {
         staticPages:false,
         settings:false,
         scheduler:false,
-        vehicleTypes:false
+        vehicleTypes:false,
+        optionManagement:false,
+        testManagement:false
     }
     public connection;
     public notifications  = [];
@@ -65,7 +67,9 @@ export class FullLayoutComponent implements OnInit {
                 staticPages:actions['staticPages'].view,
                 settings:false,
                 scheduler:false,
-                vehicleTypes:false
+                vehicleTypes:false,
+                optionManagement:false,
+                testManagement:false
             }
         }
 

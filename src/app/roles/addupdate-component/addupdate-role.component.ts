@@ -10,6 +10,7 @@ import tsMessages  = require('../../tsmessage');
   templateUrl: 'addupdate-role.component.html'
 })
 export class AddUpdateRoleComponent {
+    
 	public role = {
         name:'',
         description:'',
@@ -70,9 +71,12 @@ export class AddUpdateRoleComponent {
 
      /*If roleID exist then will update existing role otherwise will add new role*/
     save() {
+       // console.log("kulwant",this.role);
         this.role.name = this.role.name.trim();
         this.isLoading = true;
+     
         if(this.roleID) {
+            
             this._roleService.update(this.role).subscribe(res => {
                 this.isLoading = false;
                 this._commanService.showAlert(tsMessages.RECORD_UPDATED_SUCCESSFULLY,'alert-success');

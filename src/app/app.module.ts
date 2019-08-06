@@ -36,6 +36,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { CustomFormsModule } from 'ng2-validation';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
+
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,7 +63,11 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective,
     LoginComponent,
-    ForgotPasswordComponent    
+    ForgotPasswordComponent,
+ 
+    
+    
+    
   ],
   providers: [
     {

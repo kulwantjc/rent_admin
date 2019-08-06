@@ -49,4 +49,6 @@ export class UserService {
         return this._http.get(this._host +'/states?sort=stateName', { headers: headers }).map((res:Response) => res.json())
     }
 
+   
+    
 }

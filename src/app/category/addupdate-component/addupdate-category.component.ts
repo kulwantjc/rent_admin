@@ -117,6 +117,7 @@ export class AddUpdateCategoryComponent {
             
             if(res.success) {
                 let data = res.data.data
+               // console.log("cond=firm",data);
                 for (var i = 0; i < data.length; ++i) {
                     // code...
                 this.type.push(data[i].name);

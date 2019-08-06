@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { ChangePasswordComponent } from './changepassword-component/changepassword.component';
 import { MyprofileComponent } from './myprofile-component/myprofile.component';
 import { HttpModule } from '@angular/http';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,7 +32,14 @@ const routes: Routes = [
         data: {
           title: 'Change Password'
         }
-      }     
+      },
+      {
+        path: 'editprofile/:id', 
+        component: EditprofileComponent,
+        data: {
+          title: 'edit profile'
+        }
+      }
     ]
   }
 ];

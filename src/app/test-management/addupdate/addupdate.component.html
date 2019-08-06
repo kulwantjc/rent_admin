@@ -1,0 +1,93 @@
+<div class="card" *ngIf="!isPageLoading">
+  <div class="card-header">
+      <!-- <strong>{{Add}} Option Type</strong> -->
+      <strong>{{testID ? 'Edit' : 'Add'}} Test</strong>
+  </div>
+<form test="form" (ngSubmit)="save()" enctype="multipart/form-data" #addTypeForm="ngForm">
+  <div class="card-block">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="form-group has-required">
+                  <label for="nf-fname">First Name</label>
+                  <input autofocus="autofocus" type="text" id="firstName" 
+                  name="firstName" class="form-control" placeholder="" 
+                  #firstName="ngModel" [ngModel]="test.firstName"
+                   (ngModelChange)="test.firstName=$event" 
+                   (keyup)="trim('firstName')" required>
+                  <div class="error-block">
+                      <small *ngIf="firstName.errors?.required && firstName.touched" 
+                      class="text-danger">
+                          First Name is required.
+                      </small>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="form-group has-required">
+                  <label for="nf-lname">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" class="form-control" 
+                  placeholder="" #lastName="ngModel" [ngModel]="test.lastName"
+                   (ngModelChange)="test.lastName=$event" (keyup)="trim('lastName')" 
+                   required>
+                  <div class="error-block">
+                      <small *ngIf="lastName.errors?.required && lastName.touched"
+                       class="text-danger">
+                          Last Name is required.
+                      </small>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+       <div class="row">
+          <label for="nf-name">Gender</label>
+          <div class="col-sm-4">
+            <div class="radio">  
+                <label>  
+                    <input type="radio" id="gender" name="gender" value="Male" 
+                    [checked]='true' [ngModel]="test.gender" 
+                    (ngModelChange)="test.gender=$event" (keyup)="trim('gender')">  
+                    Male  
+                </label>  
+          </div>  
+          <div class="radio">  
+                <label>  
+                  <input type="radio" value="Female"  name="gender" 
+                   [ngModel]="test.gender" (ngModelChange)="test.gender=$event" 
+                   (keyup)="trim('gender')">  
+                  Female  value
+              </label>  
+          </div>
+        </div>
+          <div class="col-sm-4">        
+             <div class="form-group">
+                    <label class="image-upload-container btn btn-bwm">
+                            <span>Select Image</span>
+                            <input #imageInput
+                                   type="file"
+                                   accept="image/*"
+                                   (change)="processFile(imageInput)">
+                     </label> 
+            </div> 
+            <!-- <label for ="nf-name">qualification</label>
+            <checkbox-group [(ngModel)]="selectedItems">
+                <checkbox value="item1">Item 1</checkbox>
+                <checkbox value="item2">Item 2</checkbox>
+                <checkbox value="item3">Item 3</checkbox>
+                <checkbox value="item4">Item 4</checkbox>
+             </checkbox-group> -->
+        </div>  
+
+     </div>
+
+
+  </div>
+  <div class="card-footer">
+      <button type="reset" class="btn btn-secondary whiteclr" 
+      [routerLink]="['/test-management/list']"> Cancel</button>
+      <button type="submit" class="pull-right btn btn-primary 
+      orangeclr" [disabled]="!addTypeForm.valid">{{testID ? 'Update' : 'Save'}}</button>
+      <!-- <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addTypeForm.valid">{{option ? 'Save' : 'Save'}}</button> -->
+
+    </div>
+</form>
